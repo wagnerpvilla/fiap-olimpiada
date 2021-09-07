@@ -22,5 +22,6 @@ else
     api -> cache: persistir cache\ncom TTL de 2 min
     api -> blog: dados dos artigos
 end
+blog -> user: mostrar página
 
 @enduml
