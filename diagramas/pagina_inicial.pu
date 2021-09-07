@@ -1,0 +1,26 @@
+@startuml Pagina inicial
+actor Usuário as user
+participant Blog as blog
+boundary Api as api
+control S3 as s3
+database Redis as cache
+database DynamoDB as dynamo
+
+user -> blog: acessar blog
+blog -> api: Solicita a página inicial
+note right
+    Enviar informações
+    de localização
+end note
+
+api -> cache: solicitar a página\nda região do usuário
+alt página em cache
+    cache -> api: retornar página
+    api -> blog: retornar página
+else 
+    api -> dynamo: recuperar artigos do dia
+    api -> cache: persistir cache\ncom TTL de 2 min
+    api -> blog: dados dos artigos
+end
+
+@enduml

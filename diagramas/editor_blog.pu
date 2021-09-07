@@ -1,0 +1,20 @@
+@startuml Editor Blog
+actor Editor as edit
+participant "Micro Editor" as blog
+boundary Api as api
+control S3 as s3
+database DynamoDB as dynamo
+
+edit -> blog: salvar
+blog -> api: solicitar url de\nupload assinada
+api -> s3: solicitar url
+api -> api: formatar url final
+api -> blog: retornar url assinada\ne url final da imagem
+blog -> s3: envar as imagens
+blog -> blog: corrigir as urls das\nimagens no artigo
+blog -> api: enviar artigo
+api -> dynamo: salvar metadata dos artigos
+api -> s3: savar html do artigo
+api -> blog: confirmação
+blog -> edit: mensagem de confirmação
+@enduml

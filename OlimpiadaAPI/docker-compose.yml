@@ -1,0 +1,34 @@
+version: '3.4'
+
+services:
+  
+    olimpiadaapi:
+        container_name: olimpiadaapi
+        image: ${DOCKER_REGISTRY-}olimpiadaapi
+        build:
+            context: .
+            dockerfile: OlimpiadaAPI/Dockerfile
+        networks:
+            - nt_olimpiada
+        ports:
+            - 5000:8080
+
+    redis:
+        container_name: olimpiadaredis
+        image: redis
+        networks:
+            - nt_olimpiada
+        ports:
+            - 6379:6379 
+
+    redisfront:
+        image: redislabs/redisinsight:latest
+        container_name: redisfront
+        ports:
+            - 8001:8001
+        networks:
+            - nt_olimpiada
+   
+networks:
+  nt_olimpiada:
+    driver: bridge
