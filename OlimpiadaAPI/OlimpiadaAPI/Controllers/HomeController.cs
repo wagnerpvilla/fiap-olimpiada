@@ -10,45 +10,51 @@ using Microsoft.Extensions.Logging;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading;
+using Bogus;
 
 namespace OlimpiadaAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class HomeController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<HomeController> _logger;
         private readonly IDistributedCache cache;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger, IDistributedCache cache)
+        public HomeController(ILogger<HomeController> logger, IDistributedCache cache)
         {
             _logger = logger;
             this.cache = cache;
         }
 
         [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        public IEnumerable<Artigo> Get(string pais = "brasil")
         {
-            const string cacheKey = "WeatherForecastController.Get";
+            string cacheKey = pais;
             var rng = new Random();
 
             var cacheValue = cache.Get(cacheKey);
-            WeatherForecast[] ret;
+            Artigo[] ret;
 
             if ((cacheValue?.Length ?? 0) == 0)
             {
-                ret = Enumerable.Range(1, 150).Select(index => new WeatherForecast
-                {
-                    Date = DateTime.Now.AddDays(index),
-                    TemperatureC = rng.Next(-20, 55),
-                    Summary = Summaries[rng.Next(Summaries.Length)]
-                })
-                 .ToArray();
+                ret = new Faker<Artigo>("pt_BR")
+                    .RuleFor(r => r.Autor, f => f.Name.FullName())
+                    .RuleFor(r => r.Categoria, f => f.PickRandom(new[] { "Esporte", "Geral", "País" }))
+                    .RuleFor(r => r.Esporte, f => f.PickRandom(new[] { "Futebol", "Natação", "Volei", "Hoquei" }))
+                    .RuleFor(r => r.Modalidade, f => f.PickRandom(new[] { "Feminino", "Masculino", "Feminino 100m", "Masculino Borboleta" }))
+                    .RuleFor(r => r.Pais, f => f.Address.Country())
+                    .RuleFor(r => r.PublicadoEm, f => f.Date.Between(new DateTime(2021, 07, 01), new DateTime(2021, 07, 31)))
+                    .RuleFor(r => r.PK, (f, a) => a.PublicadoEm.ToString("yyyy-MM-dd"))
+                    .RuleFor(r => r.SK, f => f.Lorem.Sentence(f.Random.Number(5, 8)))
+                    .RuleFor(r => r.Url, f => f.Internet.Url())
+                    .Generate(150)
+                    .ToArray();
 
                 var values = JsonSerializer.Serialize(ret);
 
@@ -61,7 +67,7 @@ namespace OlimpiadaAPI.Controllers
             else
             {
                 var json = Encoding.UTF8.GetString(cacheValue);
-                ret = JsonSerializer.Deserialize<WeatherForecast[]>(json);
+                ret = JsonSerializer.Deserialize<Artigo[]>(json);
             }
 
 

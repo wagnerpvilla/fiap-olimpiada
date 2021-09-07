@@ -8,6 +8,9 @@ services:
         build:
             context: .
             dockerfile: OlimpiadaAPI/Dockerfile
+        environment:
+            - ASPNETCORE_URLS=http://+:8080
+            - ASPNETCORE_ENVIRONMENT=Development
         networks:
             - nt_olimpiada
         ports:

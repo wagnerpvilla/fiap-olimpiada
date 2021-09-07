@@ -5,7 +5,7 @@
     <DockerTargetOS>Linux</DockerTargetOS>
     <ProjectGuid>ef4c783f-a486-46ca-be94-dd6cd4b0bf93</ProjectGuid>
     <DockerLaunchAction>LaunchBrowser</DockerLaunchAction>
-    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/weatherforecast</DockerServiceUrl>
+    <DockerServiceUrl>{Scheme}://localhost:{ServicePort}/home</DockerServiceUrl>
     <DockerServiceName>olimpiadaapi</DockerServiceName>
   </PropertyGroup>
   <ItemGroup>

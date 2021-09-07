@@ -3,7 +3,7 @@
         "windowsAuthentication": false,
         "anonymousAuthentication": true,
         "iisExpress": {
-            "applicationUrl": "http://localhost:56849",
+            "applicationUrl": "http://localhost:5000/home",
             "sslPort": 0
         }
     },
@@ -12,7 +12,7 @@
         "IIS Express": {
             "commandName": "IISExpress",
             "launchBrowser": true,
-            "launchUrl": "weatherforecast",
+            "launchUrl": "home",
             "environmentVariables": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             }
@@ -20,17 +20,19 @@
         "OlimpiadaAPI": {
             "commandName": "Project",
             "launchBrowser": true,
-            "launchUrl": "weatherforecast",
+            "launchUrl": "home",
             "environmentVariables": {
-                "ASPNETCORE_ENVIRONMENT": "Development"
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://+:8080"
             },
             "dotnetRunMessages": "true",
-            "applicationUrl": "http://localhost:5000"
+            "applicationUrl": "http://localhost:5000/home",
+            "httpPort": 5000
         },
         "Docker": {
             "commandName": "Docker",
             "launchBrowser": true,
-            "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/weatherforecast",
+            "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}/",
             "publishAllPorts": true,
             "environmentVariables": {
                 "ASPNETCORE_URLS": "http://+:8080"
