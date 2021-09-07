@@ -22,6 +22,7 @@ Tags?|[]
 
 ?: Campos não obrigatórios
 
+
 ## 2. Página Inicial
 #### Diagrama
 ![Página Inicial](/diagramas/out/pagina_inicial/Pagina%20inicial.png)
