@@ -43,6 +43,10 @@ namespace OlimpiadaAPI.Controllers
 
             if ((cacheValue?.Length ?? 0) == 0)
             {
+                var qtd = cache.Get("qtd_req_base") == null ? "0" : Encoding.UTF8.GetString(cache.Get("qtd_req_base"));
+
+                cache.Set("qtd_req_base", Encoding.UTF8.GetBytes((int.Parse(qtd) + 1).ToString()));
+
                 ret = new Faker<Artigo>("pt_BR")
                     .RuleFor(r => r.Autor, f => f.Name.FullName())
                     .RuleFor(r => r.Categoria, f => f.PickRandom(new[] { "Esporte", "Geral", "País" }))
