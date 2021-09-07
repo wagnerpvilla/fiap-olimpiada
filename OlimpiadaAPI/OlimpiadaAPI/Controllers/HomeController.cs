@@ -60,7 +60,7 @@ namespace OlimpiadaAPI.Controllers
 
                 cache.Set(cacheKey, Encoding.UTF8.GetBytes(values), new DistributedCacheEntryOptions()
                 {
-                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(30)
+                    AbsoluteExpirationRelativeToNow = TimeSpan.FromSeconds(60)
                 });
                 Thread.Sleep(500);
             }
