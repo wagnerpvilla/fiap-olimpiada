@@ -15,6 +15,7 @@ Campo | Descrição
 **Categoria**| Esporte/Geral/
 **Url**| caminho S3 para oartigo
 **PublicadoEm**| 2021-09-07 15:30 
+**Autor**| Nome do autor
 Pais?| 
 Esporte?| (Natação)
 Modalidade?| (100m / feminino)
