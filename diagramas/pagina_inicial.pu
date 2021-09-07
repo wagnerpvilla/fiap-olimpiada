@@ -2,7 +2,7 @@
 actor Usuário as user
 participant Blog as blog
 boundary Api as api
-control S3 as s3
+
 database Redis as cache
 database DynamoDB as dynamo
 
