@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
+using Amazon;
+using Amazon.Runtime;
+using Amazon.Runtime.CredentialManagement;
+using Amazon.S3;
+using Amazon.S3.Model;
 using Bogus;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Distributed;
@@ -75,5 +80,7 @@ namespace OlimpiadaAPI.Controllers
 
             return ret;
         }
+
+        
     }
 }

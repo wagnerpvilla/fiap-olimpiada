@@ -24,7 +24,7 @@ namespace OlimpiadaAPI
 
             });
 
-
+            services.AddSingleton(Configuration);
             services.AddControllers();
         }
 
